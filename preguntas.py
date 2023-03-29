@@ -11,6 +11,15 @@ Utilice el archivo `data.csv` para resolver las preguntas.
 
 
 """
+import itertools
+from collections import Counter
+from datetime import datetime
+from operator import itemgetter
+
+with open ("data.csv", "r") as file:
+        data = file.readlines()
+data = [line.replace('\t','|').replace('\n','') for line in data]
+data = [line.split('|') for line in data]
 
 
 def pregunta_01():
@@ -21,7 +30,13 @@ def pregunta_01():
     214
 
     """
-    return
+    sum_second_column = 0
+    with open('data.csv', 'r') as c:
+        for line in c:
+            line = line.split('\t')
+            sum_second_column = sum_second_column + float(line[1])
+        #print(sum_second_column)
+    return sum_second_column
 
 
 def pregunta_02():
@@ -39,7 +54,35 @@ def pregunta_02():
     ]
 
     """
-    return
+    lista_columna_1 =[]
+    with open('data.csv','r') as c:
+        for line in c:
+            line = line.split('\t')
+            lista_columna_1.append(line[0])
+        lista_columna_1.sort()
+        #print(lista_columna_1)
+
+        letras_a = 0
+    letras_b = 0
+    letras_c = 0
+    letras_d = 0
+    letras_e = 0
+    for letra in lista_columna_1:
+        if letra == 'A':
+            letras_a = letras_a + 1
+        elif  letra == 'B':
+            letras_b = letras_b + 1
+        elif  letra == 'C':
+            letras_c = letras_c + 1
+        elif  letra == 'D':
+            letras_d = letras_d + 1
+        else:
+            letras_e = letras_e + 1
+        
+    lista_conteo =[('A',letras_a),('B',letras_b),('C',letras_c),('D',letras_d),('E',letras_e)] 
+    #print(lista_conteo)
+
+    return lista_conteo
 
 
 def pregunta_03():
@@ -57,7 +100,35 @@ def pregunta_03():
     ]
 
     """
-    return
+    #Pregunta 3 
+
+    sum_second_column_a = 0
+    sum_second_column_b = 0 
+    sum_second_column_c = 0
+    sum_second_column_d = 0
+    sum_second_column_e = 0
+
+        
+    with open('data.csv', 'r') as c:
+        for line in c:
+            line = line.split('\t')
+            if line[0] == 'A':
+                sum_second_column_a = sum_second_column_a + float(line[1])
+            elif  line[0] == 'B':
+                sum_second_column_b = sum_second_column_b + float(line[1])
+            elif  line[0] == 'C':
+                sum_second_column_c = sum_second_column_c + float(line[1])
+            elif  line[0] == 'D':
+                sum_second_column_d = sum_second_column_d + float(line[1])
+            else:
+                sum_second_column_e = sum_second_column_e + float(line[1])
+
+    #print(sum_second_column_a,sum_second_column_b,sum_second_column_c,sum_second_column_d,sum_second_column_e)
+
+    lista_conteo_letra =[('A',sum_second_column_a),('B',sum_second_column_b),('C',sum_second_column_c),('D',sum_second_column_d),('E',sum_second_column_e)] 
+    #print(lista_conteo_letra)
+  
+    return lista_conteo_letra
 
 
 def pregunta_04():
@@ -82,7 +153,72 @@ def pregunta_04():
     ]
 
     """
-    return
+    lista_fechas = []
+
+    with open('data.csv','r') as c:
+        for line in c:
+            line = line.split('\t')
+            lista_fechas.append(line[2][5:7])
+            lista_fechas.sort()
+        #print(lista_fechas)
+
+    lista_fechas[3] == '02'
+
+    enero = 0
+    febrero = 0
+    marzo = 0
+    abril = 0
+    mayo = 0
+    junio = 0
+    julio = 0
+    agosto = 0
+    septiembre = 0
+    octubre = 0
+    noviembre = 0
+    diciembre = 0
+
+    for mes in lista_fechas:
+        if mes == '01':
+            enero = enero + 1
+        if mes == '02':
+            febrero = febrero + 1
+        if mes == '03':
+            marzo = marzo + 1
+        if mes == '04':
+            abril = abril + 1
+        if mes == '05':
+            mayo = mayo + 1
+        if mes == '06':
+            junio = junio + 1
+        if mes == '07':
+            julio = julio + 1
+        if mes == '08':
+            agosto = agosto + 1
+        if mes == '09':
+            septiembre = septiembre + 1
+        if mes == '10':
+            octubre = octubre + 1
+        if mes == '11':
+            noviembre = noviembre + 1
+        if mes == '12':
+            diciembre = diciembre + 1
+
+    lista_conteo_mes = [
+        ("01", enero),
+        ("02", febrero),
+        ("03", marzo),
+        ("04", abril),
+        ("05", mayo),
+        ("06", junio),
+        ("07", julio),
+        ("08", agosto),
+        ("09", septiembre),
+        ("10", octubre),
+        ("11", noviembre),
+        ("12", diciembre),
+    ]
+    
+    return lista_conteo_mes
 
 
 def pregunta_05():
@@ -100,10 +236,58 @@ def pregunta_05():
     ]
 
     """
-    return
+    max_second_column_a = 0
+    min_second_column_a = 100
+    max_second_column_b = 0 
+    min_second_column_b = 100
+    max_second_column_c = 0
+    min_second_column_c = 100
+    max_second_column_d = 0
+    min_second_column_d = 100
+    max_second_column_e = 0
+    min_second_column_e = 100
+
+
+        
+    with open('data.csv', 'r') as c:
+        for line in c:
+            line = line.split('\t')
+            if line[0] == 'A':
+             if max_second_column_a < int(line[1]):
+                max_second_column_a = int(line[1])
+             if min_second_column_a > int(line[1]):
+                min_second_column_a = int(line[1])
+            elif  line[0] == 'B':
+             if max_second_column_b < int(line[1]):
+                max_second_column_b = int(line[1])
+             if min_second_column_b > int(line[1]):
+                min_second_column_b = int(line[1])
+            elif  line[0] == 'C':
+             if max_second_column_c < int(line[1]):
+                max_second_column_c = int(line[1])
+             if min_second_column_c > int(line[1]):
+                min_second_column_c = int(line[1])
+            elif  line[0] == 'D':
+             if max_second_column_d < int(line[1]):
+                max_second_column_d = int(line[1])
+             if min_second_column_d > int(line[1]):
+                min_second_column_d = int(line[1])
+            elif  line[0] == 'E':
+             if max_second_column_e < int(line[1]):
+                max_second_column_e = int(line[1])
+             if min_second_column_e > int(line[1]):
+                min_second_column_e = int(line[1])
+    lista_max_min = [('A',max_second_column_a,min_second_column_a),
+                    ('B',max_second_column_b,min_second_column_b),
+                    ('C',max_second_column_c,min_second_column_c),
+                    ('D',max_second_column_d,min_second_column_d),
+                    ('E',max_second_column_e,min_second_column_e)] 
+    #print (lista_max_min)
+    return lista_max_min
 
 
 def pregunta_06():
+    
     """
     La columna 5 codifica un diccionario donde cada cadena de tres letras corresponde a
     una clave y el valor despues del caracter `:` corresponde al valor asociado a la
@@ -125,7 +309,20 @@ def pregunta_06():
     ]
 
     """
-    return
+    nueva_lista_valores = []
+    datos_dic = []
+    valores = [x[4] for x in data]
+    lista_valores = [x.split(",") for x in valores]
+
+    for x in lista_valores:
+        for y in x:
+            nueva_lista_valores.append(y.split(":"))
+
+    for i, j in itertools.groupby(sorted(nueva_lista_valores), lambda x : x[0]):
+            valores_list = [int(x[1]) for x in j]
+            datos_dic.append((i, min(valores_list), max(valores_list)))
+    datos_dic
+    return datos_dic
 
 
 def pregunta_07():
@@ -149,7 +346,13 @@ def pregunta_07():
     ]
 
     """
-    return
+    colum = [x[:2] for x in data]
+    combinacion = []
+
+    for i, j in itertools.groupby(sorted(colum, key = lambda x: x[1]), lambda x: x[1]):
+            combinacion.append((int(i), [x[0] for x in j]))
+    #print(combinacion)
+    return combinacion
 
 
 def pregunta_08():
@@ -174,7 +377,12 @@ def pregunta_08():
     ]
 
     """
-    return
+    column = [x[:2] for x in data]
+    list_tu = []
+
+    for i, j in itertools.groupby(sorted(column, key = lambda x: x[1]), lambda x: x[1]):
+        list_tu.append((int(i), sorted(list(set([x[0] for x in j])))))
+    return list_tu
 
 
 def pregunta_09():
@@ -197,7 +405,20 @@ def pregunta_09():
     }
 
     """
-    return
+    new_lista_valores = []
+    valores = [x[4] for x in data]
+    lista_valores = [x.split(",") for x in valores]
+    contador = Counter()
+
+    for x in lista_valores:
+        for y in x:
+            new_lista_valores.append(y.split(":"))
+
+    for dicc in new_lista_valores:
+        contador[dicc[0]] += 1
+
+    return dict(sorted(contador.items()))
+   
 
 
 def pregunta_10():
@@ -218,7 +439,13 @@ def pregunta_10():
 
 
     """
-    return
+    colum = [itemgetter(0,3,4)(i) for i in data]
+    conteo = []
+    for x in colum:
+      col4 = len(x[1].split(","))
+      col5 = len(x[2].split(","))
+      conteo.append((x[0],col4,col5))
+    return conteo
 
 
 def pregunta_11():
@@ -239,7 +466,19 @@ def pregunta_11():
 
 
     """
-    return
+    col1 = [itemgetter(1)(i) for i in data]
+    col3 = [i[3].split(",") for i in data]
+    new_ = zip(col1,col3)
+    new_1 = []
+    new_group = []
+    for x in list(new_):
+        for y in x[1]:
+            new_1.append((x[0],y))
+
+    for i, j in itertools.groupby(sorted(new_1, key = lambda x: x[1]), lambda x: x[1]):
+        new_group.append((i, sum([int(y[0]) for y in j])))
+
+    return dict(new_group)
 
 
 def pregunta_12():
@@ -257,4 +496,21 @@ def pregunta_12():
     }
 
     """
-    return
+    col0 = [itemgetter(0)(i) for i in data]
+    col4 = [i[4].split(",") for i in data]
+
+    valores = []
+    a = 0
+    for x in col4:
+        for y in x:
+            a += (int(y[y.index(":")+1:]))
+        valores.append(a)
+        a = 0
+
+    new_ = zip(col0,valores)
+    new_group = []
+
+    for i, j in itertools.groupby(sorted(list(new_), key = lambda x: x[0]), lambda x: x[0]):
+        new_group.append((i, sum(y[1] for y in j)))
+    #print(dict(new_group))
+    return dict(new_group)
